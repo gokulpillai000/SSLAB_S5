@@ -1,0 +1,29 @@
+Rotate clockwise then anticlockwise
+
+START : MOV BL,0C8
+L1 : MOV DI,4200
+       MOV CL,04
+L2 : MOV AL,[DI]
+       OUT CO,AL
+       DEC BL
+       JZ L4
+       MOV DX , 1010
+L3 : DEC DX
+       JNZ L3
+       INC DI
+       LOOP L2
+       JMP L1
+L4 : MOV BL,0C8
+L5 : MOV DI,4203
+       MOV CL,04
+L6 : MOV AL, [DI]
+       OUT C0,AL
+       DEC BL
+       JZ EXIT
+       MOV DX,1010
+L7 : DEC DX
+       JNZ L7
+       DEC DI
+       LOOP L6
+       JMP L5
+EXIT : JMP START
